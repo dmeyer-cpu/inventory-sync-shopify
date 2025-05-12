@@ -1,0 +1,16 @@
+services:
+  - type: cron
+    name: shopify-inventory-sync
+    schedule: "0 */3 * * *"  # alle 3 Stunden
+    runtime: python
+    buildCommand: ""
+    startCommand: "python main.py"
+    envVars:
+      - key: SHOPIFY_STORE
+        value: ${SHOPIFY_STORE}  # Verwendet das GitHub-Secret
+      - key: ACCESS_TOKEN
+        value: ${ACCESS_TOKEN}
+      - key: XML_URL
+        value: ${XML_URL}
+      - key: SHOPIFY_LOCATION_ID
+        value: ${SHOPIFY_LOCATION_ID}

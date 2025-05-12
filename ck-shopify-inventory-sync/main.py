@@ -17,7 +17,7 @@ ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
 SHOPIFY_API_URL = f"https://{SHOPIFY_STORE}/admin/api/2024-04/graphql.json"
 SHOPIFY_REST_API_URL = f"https://{SHOPIFY_STORE}/admin/api/2024-04"
 XML_URL = os.getenv("XML_URL")
-SHOPIFY_LOCATION_ID = int(os.getenv("SHOPIFY_LOCATION_ID"))
+SHOPIFY_LOCATION_ID = os.getenv("SHOPIFY_LOCATION_ID")
 
 # Shopify erlaubt max. 2 Requests pro Sekunde → 0.5 Sek Pause
 REQUEST_DELAY = 0.5

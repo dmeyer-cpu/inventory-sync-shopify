@@ -4,6 +4,7 @@ import time
 import logging
 import os
 from dotenv import load_dotenv
+import certifi
 
 load_dotenv()
 
@@ -73,7 +74,7 @@ def load_shopify_inventory():
           }}
         }}
         """
-        response = requests.post(SHOPIFY_API_URL, headers=HEADERS_GRAPHQL, json={"query": query})
+        response = requests.post(SHOPIFY_API_URL, headers=HEADERS_GRAPHQL, json={"query": query}, verify=certifi.where())
         response.raise_for_status()
         result = response.json()["data"]["products"]
 
@@ -101,7 +102,7 @@ def load_shopify_inventory():
 # --------------------------------
 def load_xml_stock():
     logging.info("Lade XML Bestand von Falk & Ross...")
-    response = requests.get(XML_URL)
+    response = requests.get(XML_URL, verify=certifi.where())
     response.raise_for_status()
     root = ET.fromstring(response.content)
 
@@ -131,7 +132,7 @@ def update_inventory_item(inventory_item_id, new_quantity):
 
     for attempt in range(3):
         try:
-            response = requests.post(url, headers=HEADERS_REST, json=payload)
+            response = requests.post(url, headers=HEADERS_REST, json=payload, verify=certifi.where())
             if response.status_code == 200:
                 logging.info(f"✔ Bestand geändert: {inventory_item_id} → {new_quantity}")
                 time.sleep(REQUEST_DELAY)

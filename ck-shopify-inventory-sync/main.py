@@ -76,7 +76,7 @@ def load_shopify_inventory():
           }}
         }}
         """
-        response = requests.post(SHOPIFY_API_URL, headers=HEADERS_GRAPHQL, json={"query": query}, verify=false)
+        response = requests.post(SHOPIFY_API_URL, headers=HEADERS_GRAPHQL, json={"query": query}, verify=False)
         response.raise_for_status()
         result = response.json()["data"]["products"]
 
@@ -104,7 +104,7 @@ def load_shopify_inventory():
 # --------------------------------
 def load_xml_stock():
     logging.info("Lade XML Bestand von Falk & Ross...")
-    response = requests.get(XML_URL, verify=false)
+    response = requests.get(XML_URL, verify=False)
     response.raise_for_status()
     root = ET.fromstring(response.content)
 
@@ -134,7 +134,7 @@ def update_inventory_item(inventory_item_id, new_quantity):
 
     for attempt in range(3):
         try:
-            response = requests.post(url, headers=HEADERS_REST, json=payload, verify=false)
+            response = requests.post(url, headers=HEADERS_REST, json=payload, verify=False)
             if response.status_code == 200:
                 logging.info(f"✔ Bestand geändert: {inventory_item_id} → {new_quantity}")
                 time.sleep(REQUEST_DELAY)

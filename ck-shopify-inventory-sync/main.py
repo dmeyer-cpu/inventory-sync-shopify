@@ -4,7 +4,9 @@ import time
 import logging
 import os
 from dotenv import load_dotenv
+
 import certifi
+print("Certifi path:", certifi.where())
 
 load_dotenv()
 

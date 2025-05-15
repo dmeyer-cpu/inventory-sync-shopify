@@ -8,6 +8,8 @@ import certifi
 
 load_dotenv()
 
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 # --------------------------------
 # Konfiguration (aus .env)
 # --------------------------------

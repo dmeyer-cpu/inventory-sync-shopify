@@ -1,0 +1,32 @@
+name: Shopify Inventory Sync
+
+on:
+  schedule:
+    - cron: '0 */3 * * *'  # alle 3 Stunden
+  workflow_dispatch:       # manuell startbar
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    env:
+      SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE }}
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      XML_URL: ${{ secrets.XML_URL }}
+      SHOPIFY_LOCATION_ID: ${{ secrets.SHOPIFY_LOCATION_ID }}
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'  # ⚠️ Nicht 3.13!
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run script
+        run: python main.py

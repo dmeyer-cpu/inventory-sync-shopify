@@ -28,4 +28,4 @@ jobs:
           pip install -r .github/workflows/requirements.txt
 
       - name: Run script
-        run: python main.py
+        run: python ck-shopify-inventory-sync/main.py

@@ -2,7 +2,7 @@ name: Shopify Inventory Sync
 
 on:
   schedule:
-    - cron: '0 */3 * * *'  # alle 3 Stunden
+    - cron: '0 */1 * * *'  # alle 1 Stunde
   workflow_dispatch:       # manuell startbar
 
 jobs:
